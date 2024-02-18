@@ -3,19 +3,31 @@ import java.util.ArrayList;
 class Solution {
     public int[] createTargetArray(int[] nums, int[] index) {
 
-        int n = nums.length;
-        
-        List<Integer> targetlist = new ArrayList <> ();
+        int n = nums.length; 
         int[] result = new int[n];
 
         for(int i = 0; i < n; i++){
 
-            targetlist.add(index[i],nums[i]);
+            shiftinsert(nums[i], index[i], result);
         }
 
-        for(int i =0; i < n; i++) result[i] = targetlist.get(i);
 
         return result;
     }
+
+    public static void shiftinsert(int value, int ind, int[] arr){
+
+        for (int i = arr.length -1; i > ind ; i--){
+            
+             arr[i] = arr[i-1];
+            
+
+        }
+        arr[ind] = value;
+
+        return ;
+
+    }
+
     
 }
