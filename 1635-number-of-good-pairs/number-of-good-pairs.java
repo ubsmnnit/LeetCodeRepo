@@ -1,19 +1,31 @@
 class Solution {
     public int numIdenticalPairs(int[] nums) {
 
-        int count = 0;
+        Map<Integer,Integer> frequency = new HashMap<>(); 
 
-        for(int i = 0; i < nums.length; i++ ){
+        int n = nums.length;
 
-            for (int j = i +1 ; j < nums.length; j++){
-
-              count =   (nums[i] == nums[j]) ? count+1  : count;
-
-            }   
-    
+        for(int i = 0; i < n; i++){
+            if (frequency.containsKey(nums[i])) frequency.put(nums[i],frequency.get(nums[i])+1);
+            else frequency.put(nums[i],1);
         }
 
-    return count;
+        int pair = 0;
+
+        for(Map.Entry<Integer,Integer> element : frequency.entrySet()){
+
+
+
+            int temp = element.getValue();
+
+            int ind_pair = temp * (temp - 1) / 2 ;
+
+            pair += ind_pair;
+        }
+
+       
+
+    return pair;
         
     }
 }
