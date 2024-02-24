@@ -1,21 +1,29 @@
 class Solution {
     public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
 
-        Map<String,Integer> specs = new HashMap<>();
+      
+       switch(ruleKey){
+           case "type" : return match(items,ruleKey,ruleValue,0,0);
+           case "color" : return match(items,ruleKey,ruleValue,0,1);
+           default: return match(items,ruleKey,ruleValue,0,2);
+       }
 
-        specs.put("type",0);
-        specs.put("color",1);
-        specs.put("name",2);
 
-        int j = specs.get(ruleKey);
-        int count = 0;
+}
 
-        for(int i =0; i< items.size(); i++){
-            List<String> element = items.get(i);
-            if (element.get(j).equals(ruleValue)) count += 1; 
-        }
+public static int match(List<List<String>> items, String ruleKey, String ruleValue, int i, int j){
 
-    return count;
-        
-    }
+if(i == items.size()) return 0;
+
+if(items.get(i).get(j).equals(ruleValue)) return 1 + match(items,ruleKey,ruleValue,i+1,j);
+
+else return match(items,ruleKey,ruleValue,i+1,j);
+
+
+
+//System.out.println(items.get(i).get(j) + " " + i + " " + ruleValue);
+
+
+}
+
 }
